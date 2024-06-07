@@ -1,0 +1,90 @@
+
+header {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  padding: 1rem 0;
+}
+
+.tn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tn-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input[type='search'] {
+  width: 300px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+}
+
+.search-box .search-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.tn-icons a {
+  margin-left: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.tn-icons a:hover {
+  color: #007bff;
+}
+
+hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.bn-container {
+  text-align: center;
+}
+
+.navlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navlist li {
+  margin: 0 15px;
+}
+
+.navlist li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navlist li a:hover {
+  color: #007bff;
+}

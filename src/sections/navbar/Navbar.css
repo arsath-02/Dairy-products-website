@@ -1,20 +1,26 @@
-
 header {
   background-color: #f8f9fa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 nav {
   padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tn-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
 }
 
 .tn-logo {
@@ -42,10 +48,11 @@ nav {
   position: absolute;
   right: 10px;
   cursor: pointer;
+  color: #000000;
 }
 
 .tn-icons a {
-  margin-left: 20px;
+  margin-left: 30px; /* Add space between icons */
   font-size: 1.2rem;
   color: #333;
   text-decoration: none;
@@ -56,14 +63,21 @@ nav {
   color: #007bff;
 }
 
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
 hr {
   margin: 1rem 0;
   border: none;
   border-top: 1px solid #eee;
+  width: 100%;
 }
 
 .bn-container {
   text-align: center;
+  width: 100%;
 }
 
 .navlist {
@@ -87,4 +101,98 @@ hr {
 
 .navlist li a:hover {
   color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .tn-icons {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-box {
+    display: none;
+  }
+  .tn-links {
+    display: flex;
+    margin-left: 30px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .tn-links .btn {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+    padding: 12px 24px;
+    margin:20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tn-links .btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }
+  
+  .tn-links .btn:not(:last-child) {
+    margin-right: 50px; 
+  }
+  
+
+  .bn-container {
+    display: ${isSidebarOpen ? 'block' : 'none'};
+  }
+
+  /* Common button styling */
+  .tn-links .btn {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .tn-links .btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }
+
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    .tn-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      display: none;
+    }
+
+    .tn-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .tn-links .btn:not(:last-child) {
+      margin-right: 20%; 
+    }
+
+    .bn-container {
+      display: ${isSidebarOpen ? 'block' : 'none'};
+    }
+  }
 }

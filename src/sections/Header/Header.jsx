@@ -1,16 +1,19 @@
 import React from 'react';
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
 import image1 from '../../assets/images4.png';
 import CountUp from 'react-countup';
 
 export const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="header">
       <div className="header-container container">
         <div className="header-left">
           <h1>Get best products from Milky Products</h1>
           <p>Get the products Now</p>
-          <button className='btn'>Shop Now</button>
+          <button className='btn' onClick={() => navigate('/shop')}>Shop Now</button>
           <div className="header-stats">
             <div className="stat-box">
               <span >

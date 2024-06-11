@@ -10,7 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
     padding: 20px;
   }
   
@@ -27,7 +27,7 @@
   
   .category-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
   
   .category-image {
@@ -37,7 +37,7 @@
   }
   
   .category-name {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 10px 0;
     color: #333;
   }

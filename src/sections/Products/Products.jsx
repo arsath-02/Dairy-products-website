@@ -1,4 +1,3 @@
-// src/components/Products/Products.jsx
 import React from 'react';
 import './Products.css';
 import { productsData } from './Data';
@@ -18,7 +17,7 @@ export const Products = ({ addToCart }) => {
                 <p>{product.description}</p>
                 <p className="price">{product.price}</p>
                 <div>
-                <button onClick={() => addToCart(product)} className="btn">Add to Cart</button>
+                  <button onClick={() => addToCart(product)} className="btn">Add to Cart</button>
                 </div>
               </div>
             </div>
@@ -27,6 +26,6 @@ export const Products = ({ addToCart }) => {
       </div>
     </section>
   );
-}
+};
 
 export default Products;

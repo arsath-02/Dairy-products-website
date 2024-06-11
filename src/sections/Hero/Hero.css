@@ -1,7 +1,7 @@
 #hero {
     position: relative;
     width: 100%;
-    max-width: 800px; /* Adjust the max-width to your desired width */
+    max-width: 800px; 
     margin: 0 auto;
     overflow: hidden;
   }
@@ -11,7 +11,7 @@
   }
   
   .carousel .slide img {
-    max-width: 100%; /* Ensure the image doesn't exceed the carousel width */
+    max-width: 100%; 
     height: auto;
   }
   
@@ -48,7 +48,7 @@
   }
   
   .carousel .thumbs-wrapper {
-    display: none; /* Hide the thumbnail navigation */
+    display: none; 
   }
   
   .carousel .control-arrow {

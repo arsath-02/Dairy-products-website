@@ -23,7 +23,7 @@
   .product-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     justify-content: center;
   }
   

@@ -2,7 +2,7 @@ import React from 'react';
 import './Products.css';
 import { productsData } from './Data';
 
-export const Products = ({ addToCart }) => {
+export const Products = ({ addToCart, toggleFavorite, favorites }) => {
   return (
     <section id="products">
       <div className="products-container">
@@ -16,8 +16,14 @@ export const Products = ({ addToCart }) => {
                 <p>{product.type}</p>
                 <p>{product.description}</p>
                 <p className="price">{product.price}</p>
-                <div>
+                <div className="product-actions">
                   <button onClick={() => addToCart(product)} className="btn">Add to Cart</button>
+                  <span
+                    className={`favorite-icon ${favorites.includes(product) ? 'favorited' : ''}`}
+                    onClick={() => toggleFavorite(product)}
+                  >
+                    &#9733;
+                  </span>
                 </div>
               </div>
             </div>

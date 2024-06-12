@@ -8,7 +8,11 @@ const Cart = ({ cart, removeFromCart, totalPrice }) => {
       <ul>
         {cart.map((item, index) => (
           <li key={index}>
-            <span>{item.name} - ${parseFloat(item.price.replace(/[^0-9.-]+/g, "")).toFixed(2)}</span>
+            <img src={item.image} alt={item.name} className="cart-item-image" />
+            <div className="cart-item-details">
+              <span>{item.name}</span>
+              <span>${parseFloat(item.price.replace(/[^0-9.-]+/g, "")).toFixed(2)}</span>
+            </div>
             <button onClick={() => removeFromCart(index)}>Remove</button>
           </li>
         ))}

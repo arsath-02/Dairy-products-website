@@ -1,0 +1,87 @@
+#favorites {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .favorites-container {
+    text-align: center;
+  }
+  
+  .favorites-container h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .favorite-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    transition: transform 0.3s ease;
+  }
+  
+  .favorite-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .favorite-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .favorite-details {
+    text-align: left;
+  }
+  
+  .favorite-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .favorite-details p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .favorite-details .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .remove-btn {
+   
+    margin-right: 10px; 
+  }
+  

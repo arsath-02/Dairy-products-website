@@ -1,3 +1,5 @@
+/* Navbar.css */
+
 header {
   background-color: #f8f9fa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,11 +25,17 @@ nav {
   padding: 0 1rem;
 }
 
+.left-section, .right-section {
+  display: flex;
+  align-items: center;
+}
+
 .tn-logo {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  margin-right: 25px;
 }
 
 .search-box {
@@ -51,12 +59,45 @@ nav {
   color: #000000;
 }
 
+.tn-links {
+  display: flex;
+  align-items: center;
+}
+
+.tn-links .navbar-item {
+  list-style: none;
+  margin: 0 15px;
+}
+
+.tn-links .navbar-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.tn-links .btn {
+  background-color: #007bff;
+  color: white;
+  border: 2px solid #007bff;
+  padding: 12px 24px;
+  margin: 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tn-links .btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
 .tn-icons a {
-  margin-left: 30px; 
-  font-size: 1.2rem;
+  margin-left: 15px;
+  font-size: 1.5rem;
   color: #333;
   text-decoration: none;
   transition: color 0.3s;
+padding: 10px;
 }
 
 .tn-icons a:hover {
@@ -116,83 +157,24 @@ hr {
   .search-box {
     display: none;
   }
+
   .tn-links {
-    display: flex;
-    margin-left: 30px;
-    justify-content: center;
-    margin-top: 20px;
+    display: none;
   }
-  
-  .tn-links .btn {
-    background-color: #007bff;
-    color: white;
-    border: 2px solid #007bff;
-    padding: 12px 24px;
-    margin:20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .tn-links .btn:hover {
-    background-color: #0056b3;
-    color: #fff;
-  }
-  
-  .tn-links .btn:not(:last-child) {
-    margin-right: 50px; 
-  }
-  
 
   .bn-container {
-    display: ${isSidebarOpen ? 'block' : 'none'};
+    display: none;
   }
 
-  /* Common button styling */
-  .tn-links .btn {
-    background-color: #007bff;
-    color: white;
-    border: 2px solid #007bff;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color 0.3s, color 0.3s;
+  .bn-container.open {
+    display: block;
   }
 
-  .tn-links .btn:hover {
-    background-color: #0056b3;
-    color: #fff;
+  .navlist {
+    flex-direction: column;
   }
 
-  /* Media query for smaller screens */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-    }
-
-    .tn-icons {
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box {
-      display: none;
-    }
-
-    .tn-links {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .tn-links .btn:not(:last-child) {
-      margin-right: 20%; 
-    }
-
-    .bn-container {
-      display: ${isSidebarOpen ? 'block' : 'none'};
-    }
+  .navlist li {
+    margin: 10px 0;
   }
 }

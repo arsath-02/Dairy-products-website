@@ -10,9 +10,14 @@ import Footer from './sections/Footer/Footer';
 import Hero from './sections/Hero/Hero';
 import Products from './sections/Products/Products';
 import Cart from './sections/Cart/Cart';
+import Contact from './sections/Contact/Contact';
+import Favorites from './sections/Favourites/Favourites';
+import Register from './sections/Register/Register';
+import Login from './sections/Login/Login';
 
-export const App = () => {
+const App = () => {
   const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const addToCart = (product) => {
     setCart([...cart, product]);
@@ -22,36 +27,95 @@ export const App = () => {
     setCart(cart.filter((_, i) => i !== index));
   };
 
+  const toggleFavorite = (product) => {
+    if (favorites.some((fav) => fav.id === product.id)) {
+      setFavorites(favorites.filter((fav) => fav.id !== product.id));
+    } else {
+      setFavorites([...favorites, product]);
+    }
+  };
+
+  const removeFromFavorites = (productId) => {
+    setFavorites(favorites.filter((product) => product.id !== productId));
+  };
+
+  const removeAllFavorites = () => {
+    setFavorites([]);
+  };
+
   const totalPrice = cart.reduce((total, item) => {
-    const price = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+    const price = parseFloat(item.price.replace(/[^0-9.-]+/g, ''));
     return total + price;
   }, 0);
 
+  const onFormSwitch = (formName) => {
+    console.log('Switch to form:', formName);
+  };
+
   return (
     <Router>
+      <Navbar />
       <main>
-        <Navbar />
         <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <Header />
-              <Categories />
-              <Shop addToCart={addToCart} />
-              <Products addToCart={addToCart} />
-              <Deal />
-              <Footer />
-            </>
-          } />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Header />
+                <Deal />
+                <Categories />
+                <Shop addToCart={addToCart} />
+                <Products
+                  addToCart={addToCart}
+                  toggleFavorite={toggleFavorite}
+                  favorites={favorites}
+                />
+                <Footer />
+              </>
+            }
+          />
           <Route path="/categories" element={<Categories />} />
           <Route path="/shop" element={<Shop addToCart={addToCart} />} />
-          <Route path="/products" element={<Products addToCart={addToCart} />} />
+          <Route
+            path="/products"
+            element={
+              <Products
+                addToCart={addToCart}
+                toggleFavorite={toggleFavorite}
+                favorites={favorites}
+              />
+            }
+          />
           <Route path="/deal" element={<Deal />} />
-          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} totalPrice={totalPrice} />} />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                removeFromCart={removeFromCart}
+                totalPrice={totalPrice}
+              />
+            }
+          />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                favorites={favorites}
+                addToCart={addToCart}
+                removeFromFavorites={removeFromFavorites}
+                removeAllFavorites={removeAllFavorites}
+              />
+            }
+          />
+          <Route path="/register" element={<Register onFormSwitch={onFormSwitch} />} />
+          <Route path="/login" element={<Login onFormSwitch={onFormSwitch} />} />
         </Routes>
       </main>
     </Router>
   );
-}
+};
 
 export default App;

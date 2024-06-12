@@ -1,24 +1,26 @@
 import React from 'react';
 import './Deal.css';
-
+import delivery from '../../assets/delivery.jpeg';
+import cheese1 from '../../assets/cheese1.jpeg';
+import one from '../../assets/one+one.png';
 const deals = [
   {
     id: 1,
     title: 'Buy One Get One Free',
     description: 'Get two products for the price of one!',
-    image: 'path/to/deal1.jpg'
+    image: one
   },
   {
     id: 2,
     title: '20% Off on All Cheeses',
     description: 'Enjoy a discount on all cheese products.',
-    image: 'path/to/deal2.jpg'
+    image: cheese1
   },
   {
     id: 3,
     title: 'Free Delivery',
     description: 'Free delivery on orders over $50.',
-    image: 'path/to/deal3.jpg'
+    image: delivery
   },
  
 ];

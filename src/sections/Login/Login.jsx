@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import './Login.css';
 
-function Login({ onFormSwitch }) {
+function Login({ onFormSwitch, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -44,7 +46,7 @@ function Login({ onFormSwitch }) {
   const handleAsyncSubmit = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/signin', {
+      const response = await fetch('http://localhost:5000/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -55,8 +57,10 @@ function Login({ onFormSwitch }) {
         setMessage('Login successful!');
         setErrors({ email: '', password: '' });
         localStorage.setItem('token', data.token);
+        onLogin(data.token); // Call the onLogin function passed via props
+        navigate('/home'); // Redirect to home page after successful login
       } else {
-        setMessage(data.error || 'Login failed. Please try again.');
+        setMessage(data.message || 'Login failed. Please try again.');
       }
     } catch (error) {
       setMessage('An error occurred. Please try again.');

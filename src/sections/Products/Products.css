@@ -1,3 +1,5 @@
+/* Products.css */
+
 #products {
   padding: 20px;
   background-color: #f9f9f9;
@@ -26,17 +28,18 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-item:hover {
-  transform: translateY(-10px); /* Hover effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+  transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .product-image {
   width: 100%;
-  height: auto;
+  height: 150px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensures the image covers the entire area, cropping if necessary */
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -63,21 +66,25 @@
   color: #007bff;
 }
 
-.btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 25px;
-  transition: background-color 0.3s;
-}
 .product-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Stretch items vertically */
+}
+
+.quantity-favorite {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+  margin-bottom: 10px;
+}
+
+.quantity-dropdown {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 .favorite-icon {
@@ -91,7 +98,60 @@
   color: rgb(236, 19, 19);
 }
 
+.btn {
+  background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradient background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+  text-align: center;
+  width: 100%; /* Full width */
+}
 
 .btn:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #a777e3, #6e8efb); 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-2px); 
+}
+
+
+.search-bar {
+  position: relative;
+  margin: 20px auto; 
+  max-width: 600px;
+}
+
+.search-bar input[type='text'] {
+  width: calc(100% - 40px); /* Adjusted width to accommodate for button padding */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  outline: none;
+  font-size: 1.2em;
+}
+
+.search-bar input[type='text']:focus {
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background-color: #999;
+  color: #fff;
 }

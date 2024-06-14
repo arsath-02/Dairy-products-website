@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 function Register({ onFormSwitch }) {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [errors, setErrors] = useState({ email: '', password: '', confirmPassword: '' });
+  const [errors, setErrors] = useState({ firstname: '', lastname: '', email: '', password: '', confirmPassword: '' });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validateForm = () => {
     let valid = true;
-    const newErrors = { email: '', password: '', confirmPassword: '' };
+    const newErrors = { firstname: '', lastname: '', email: '', password: '', confirmPassword: '' };
+
+    if (firstname === '') {
+      newErrors.firstname = 'First name is required';
+      valid = false;
+    }
+
+    if (lastname === '') {
+      newErrors.lastname = 'Last name is required';
+      valid = false;
+    }
 
     if (email === '') {
       newErrors.email = 'Email is required';
@@ -41,26 +55,30 @@ function Register({ onFormSwitch }) {
   const handleAsyncSubmit = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch('http://localhost:5000/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstname, lastname, email, password, confirmPassword }),
       });
-
+  
       const data = await response.json();
+      console.log('Response:', data);
+  
       if (response.ok) {
         setMessage('Registration successful!');
-        setErrors({ email: '', password: '', confirmPassword: '' });
-        onFormSwitch('login'); // Switch to login form after successful registration
+        setErrors({ firstname: '', lastname: '', email: '', password: '', confirmPassword: '' });
+        navigate('/login'); // Redirect to login page
       } else {
-        setMessage(data.error || 'Registration failed. Please try again.');
+        setMessage(data.message || 'Registration failed. Please try again.');
       }
     } catch (error) {
+      console.error('Error:', error);
       setMessage('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,6 +95,26 @@ function Register({ onFormSwitch }) {
       <div className="form">
         <h2 className="header">Register</h2>
         <form onSubmit={handleSubmit}>
+          <label className="label">
+            First Name:
+            <input
+              type="text"
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              className="input"
+            />
+            {errors.firstname && <p className="error">{errors.firstname}</p>}
+          </label>
+          <label className="label">
+            Last Name:
+            <input
+              type="text"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              className="input"
+            />
+            {errors.lastname && <p className="error">{errors.lastname}</p>}
+          </label>
           <label className="label">
             Email:
             <input
@@ -131,9 +169,7 @@ function Register({ onFormSwitch }) {
             {message}
           </p>
         )}
-        <div className='spinner-container'>
-          {loading ? <ClipLoader /> : null}
-        </div>
+        {loading && <p>Loading...</p>}
       </div>
     </div>
   );

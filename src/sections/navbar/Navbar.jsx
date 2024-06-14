@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { RiSearchLine, RiShoppingCartFill, RiUserFill, RiHeartFill, RiMenu3Line } from 'react-icons/ri';
 import './Navbar.css';
 
-export const Navbar = () => {
+const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 

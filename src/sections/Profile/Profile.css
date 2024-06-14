@@ -1,85 +1,192 @@
 /* Profile.css */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.profile-details {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.profile-details .label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-details form {
+  display: grid;
+  gap: 10px;
+}
+
+.profile-details input[type="text"],
+.profile-details input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.profile-actions {
+  text-align: center;
+}
+
+.profile-actions button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.profile-actions button.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.profile-actions button.btn-danger:hover {
+  background-color: #c82333;
+}
+/* Profile.css */
 
 .profile-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-header h2 {
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  .profile-details {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .profile-details p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .profile-details .label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .profile-details form {
-    display: grid;
-    gap: 10px;
-  }
-  
-  .profile-details input[type="text"],
-  .profile-details input[type="email"] {
-    width: 100%;
-    padding: 8px;
-    font-size: 1rem;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-  
-  .profile-actions {
-    text-align: center;
-  }
-  
-  .profile-actions button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-  
-  .profile-actions button.btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-  }
-  
-  .profile-actions button.btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .profile-actions button.btn {
-    background-color: #4591e8;
-    border: none;
-    color: white;
-  }
-  
-  .profile-actions button.btn:hover {
-    background-color: #1e6bb8;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.profile-details {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.profile-details .label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-details form {
+  display: grid;
+  gap: 10px;
+}
+
+.profile-details input[type="text"],
+.profile-details input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.profile-actions {
+  text-align: center;
+}
+
+.profile-actions button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-actions button.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.profile-actions button.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.profile-actions button.btn {
+  background-color: #4591e8;
+  border: none;
+  color: white;
+}
+
+.profile-actions button.btn:hover {
+  background-color: #1e6bb8;
+}
+
+/* New styles for profile picture */
+.profile-picture {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  object-fit: cover;
+}
+
+.profile-actions button.btn {
+  background-color: #4591e8;
+  border: none;
+  color: white;
+}
+
+.profile-actions button.btn:hover {
+  background-color: #1e6bb8;
+}

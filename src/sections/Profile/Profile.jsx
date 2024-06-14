@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Profile.css';
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -39,13 +40,24 @@ function ProfilePage() {
   }, [navigate]);
 
   return (
-    <div className="container">
-      <h2>User Profile</h2>
+    <div className="profile-container">
+      <div className="profile-header">
+        <h2>User Profile</h2>
+      </div>
       {user ? (
-        <div className="profile">
+        <div className="profile-details">
+          {user.profilePicture && (
+            <div className="profile-picture">
+              <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" />
+            </div>
+          )}
           <p><strong>First Name:</strong> {user.firstname}</p>
           <p><strong>Last Name:</strong> {user.lastname}</p>
           <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>Address:</strong> {user.address}</p>
+          <p><strong>Landmark:</strong> {user.landmark}</p>
+          <p><strong>Pincode:</strong> {user.pincode}</p>
+          <p><strong>Phone Number:</strong> {user.phoneNo}</p>
         </div>
       ) : (
         <p>Loading user profile...</p>

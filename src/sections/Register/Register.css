@@ -1,30 +1,62 @@
-/* App.css */
-.body {
-  font-family: Arial, sans-serif;
-}
-.app-container {
+/* Register.css */
+
+.register-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f7f7f7;
-  font-family: Arial, sans-serif;
-}
-
-
-h2 {
-  color: #333;
+  min-height: 100vh;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px; /* Limit the form width */
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
   border-radius: 5px;
-  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  color: #333;
 }
 
 .label {
@@ -33,7 +65,7 @@ form {
   font-weight: bold;
 }
 
-.login-input {
+.input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -43,7 +75,7 @@ form {
   box-sizing: border-box;
 }
 
-.login-submit {
+.button {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -53,8 +85,8 @@ form {
   cursor: pointer;
 }
 
-.login-submit:hover {
-  background-color: #4591e8;
+.button:hover {
+  background-color: #3367b7;
 }
 
 .error {
@@ -72,4 +104,12 @@ form {
 
 .spinner-container {
   margin-top: 20px;
+}
+
+.message-success {
+  color: green;
+}
+
+.message-error {
+  color: red;
 }

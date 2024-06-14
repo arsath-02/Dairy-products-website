@@ -4,6 +4,9 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Initialize dotenv
 dotenv.config();
@@ -26,19 +29,42 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('Failed to connect to MongoDB', err);
 });
 
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configure storage for Multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 // User schema and model
 const userSchema = new mongoose.Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
+  address: { type: String, required: false },
+  landmark: { type: String, required: false },
+  pincode: { type: String, required: false },
+  phoneNo: { type: String, required: false },
+  profilePicture: { type: String, required: false },
 }, { collection: 'users' });
 
 const User = mongoose.model('User', userSchema);
 
 // Signup route
-app.post('/api/signup', async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
+app.post('/api/signup', upload.single('profilePicture'), async (req, res) => {
+  const { firstname, lastname, email, password, address, landmark, pincode, phoneNo } = req.body;
+  const profilePicture = req.file ? req.file.path : '';
+  
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -46,7 +72,9 @@ app.post('/api/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ firstname, lastname, email, password: hashedPassword });
+    const newUser = new User({ 
+      firstname, lastname, email, password: hashedPassword, address, landmark, pincode, phoneNo, profilePicture 
+    });
     await newUser.save();
 
     res.json({ success: true, message: 'User registered successfully' });
@@ -77,19 +105,21 @@ app.post('/api/signin', async (req, res) => {
   }
 });
 
+// Serve profile pictures
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Profile route
 app.get('/api/profile', authenticateToken, async (req, res) => {
   try {
-    const userId = req.user.userId; // Extract userId from authenticated user
-    const user = await User.findById(userId); // Assuming you have a User model
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // Send only necessary fields (you can adjust this based on your needs)
-    const { firstname, lastname, email } = user;
-    res.json({ success: true, firstname, lastname, email });
+    const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
+    res.json({ success: true, firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture });
   } catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch user profile', error: error.message });

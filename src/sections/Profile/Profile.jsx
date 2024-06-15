@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Profile.css';
 
-function ProfilePage() {
+import { useAuth } from '../../contexts/AuthContext'; 
+import { Button } from 'react-bootstrap'; 
+
+function Profile() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null); 
+  const { token, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem('token'); // Assuming you store token in localStorage after login
+        
+        const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/login'); // Redirect to login if token is not present
+          navigate('/login'); 
           return;
         }
 
@@ -25,20 +33,58 @@ function ProfilePage() {
 
         if (response.ok) {
           const userData = await response.json();
-          setUser(userData);
+          setUser(userData); 
         } else {
           throw new Error('Failed to fetch user profile');
         }
       } catch (error) {
         console.error('Error fetching user profile:', error);
-        // Handle error (e.g., redirect to login page or show an error message)
-        navigate('/login');
-      }
+        navigate('/login'); 
+            } finally {
+        setIsLoading(false); 
+            }
     };
 
-    fetchUserProfile();
-  }, [navigate]);
+    fetchUserProfile(); 
+  }, [navigate]); 
 
+  const handleDeleteAccount = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
+      const response = await axios.delete('http://localhost:5000/api/users/me', config);
+  
+      if (response.data.success) {
+        logout(); 
+        navigate('/login'); 
+      } else {
+        setError(response.data.message || 'Failed to delete account');
+      }
+    } catch (error) {
+      setError(error.message || 'Failed to delete account');
+    }
+  };
+  
+
+  const handleUpdateProfile = () => {
+    navigate('/update-profile');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login'); 
+  };
+
+  
+  if (isLoading) {
+    return <p>Loading user profile...</p>;
+  }
+
+  
   return (
     <div className="profile-container">
       <div className="profile-header">
@@ -58,12 +104,20 @@ function ProfilePage() {
           <p><strong>Landmark:</strong> {user.landmark}</p>
           <p><strong>Pincode:</strong> {user.pincode}</p>
           <p><strong>Phone Number:</strong> {user.phoneNo}</p>
+          
+          <div className="profile-actions">
+          
+            <button className="btn btn-secondary" onClick={handleLogout}>Logout</button>
+            {error && <p className="text-danger mt-3">{error}</p>}
+          </div>
         </div>
       ) : (
-        <p>Loading user profile...</p>
+        <p>No user profile found.</p>
       )}
     </div>
   );
 }
 
-export default ProfilePage;
+export default Profile;
+// <button className="btn btn-primary" onClick={handleUpdateProfile}>Update Profile</button>
+//<Button variant="danger" onClick={handleDeleteAccount}>Delete Account</Button>

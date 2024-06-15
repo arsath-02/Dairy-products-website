@@ -24,7 +24,7 @@ export const Header = () => {
             </div>
             <div className="stat-box">
               <span>
-                <CountUp end={1500} duration={5} />
+                <CountUp end={15000} duration={5} />
                 <p className="count-plus">+</p>
               </span>
               <h3>Customers</h3>

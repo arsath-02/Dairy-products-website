@@ -1,4 +1,4 @@
-// Favorites.js
+
 
 import React from 'react';
 import './Favourites.css';

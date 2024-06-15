@@ -19,6 +19,18 @@
   align-items: center;
 }
 
+.register-link-container{
+  background-color: #4591e8;
+  border: 'none';
+  color: 'white';
+  padding: '10px 20px';
+  text-align: 'center';
+  text-decoration: 'none';
+  display: 'inline-block';
+  font-size: '16px';
+  cursor: 'pointer';
+  margin-top: '20px';
+}
 
 .input {
   width: 100%;

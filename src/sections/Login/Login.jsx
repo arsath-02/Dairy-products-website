@@ -57,8 +57,8 @@ function Login({ onFormSwitch, onLogin }) {
         setMessage('Login successful!');
         setErrors({ email: '', password: '' });
         localStorage.setItem('token', data.token);
-        onLogin(data.token); // Call the onLogin function passed via props
-        navigate('/home'); // Redirect to home page after successful login
+        onLogin(data.token); 
+        navigate('/home'); 
       } else {
         setMessage(data.message || 'Login failed. Please try again.');
       }
@@ -106,29 +106,15 @@ function Login({ onFormSwitch, onLogin }) {
           </label>
           <input type="submit" value="Submit" className="button" />
         </form>
-        <button
-          onClick={() => onFormSwitch('register')}
-          style={{
-            backgroundColor: '#4591e8',
-            border: 'none',
-            color: 'white',
-            padding: '10px 20px',
-            textAlign: 'center',
-            textDecoration: 'none',
-            display: 'inline-block',
-            fontSize: '16px',
-            cursor: 'pointer',
-            marginTop: '20px',
-          }}
-        >
-          Don't have an account? Register
-        </button>
+        <div className="login-link-container">
+          <p>Don't have an account? <button className="login-link" onClick={() => navigate('/register')}>Register</button></p>
+        </div>
         {message && (
           <p className={`message ${message === 'Login successful!' ? 'message-success' : 'message-error'}`}>
             {message}
           </p>
         )}
-        <div className='spinner-container'>
+        <div className="spinner-container">
           {loading ? <ClipLoader /> : null}
         </div>
       </div>

@@ -20,6 +20,7 @@ form {
   flex-direction: column;
   width: 100%;
   max-width: 400px; /* Limit the form width */
+  margin-top: 20px; /* Added margin for separation from container */
 }
 
 h2 {
@@ -37,6 +38,7 @@ input[type="file"] {
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  width: 100%; /* Full-width input */
 }
 
 button[type="submit"] {
@@ -49,14 +51,11 @@ button[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%; /* Full-width button */
 }
 
 button[type="submit"]:hover {
   background-color: #0056b3;
-}
-
-h2 {
-  color: #333;
 }
 
 .label {
@@ -80,9 +79,11 @@ h2 {
   border: none;
   border-radius: 4px;
   background-color: #4591e8;
-  color: white;
+  color: rgb(32, 144, 214);
   font-size: 16px;
   cursor: pointer;
+  width: 100%; /* Full-width button */
+  margin-top: 20px; /* Added margin for separation */
 }
 
 .button:hover {
@@ -95,7 +96,10 @@ h2 {
   margin-top: -10px;
   margin-bottom: 10px;
 }
-
+.login-link{
+  color:whitesmoke;
+  background-color: #4591e8;
+}
 .message {
   font-size: 14px;
   color: green;

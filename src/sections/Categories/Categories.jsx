@@ -15,10 +15,10 @@ import data20 from '../../assets/data20.jpeg';
 import data22 from '../../assets/data22.jpeg';
 import data30 from '../../assets/data30.jpeg';
 import data24 from '../../assets/data24.jpeg';
-import yogurtImage from '../../assets/yogurt.jpeg'; // Add this line
-import cheeseImage from '../../assets/cheese.jpeg'; // Add this line
-import butterImage from '../../assets/butter.jpeg'; // Add this line
-import GheeImage from '../../assets/ghee.jpeg'; // Add this line
+import yogurtImage from '../../assets/yogurt.jpeg'; 
+import cheeseImage from '../../assets/cheese.jpeg'; 
+import butterImage from '../../assets/butter.jpeg';
+import GheeImage from '../../assets/ghee.jpeg'; 
 
 const categories = [
   { name: 'Milk', image: milkImage },

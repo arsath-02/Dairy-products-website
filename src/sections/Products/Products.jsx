@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
 import './Products.css';
-import { productsData } from './Data'; // Assuming you have product data
+import { productsData } from './Data'; 
 
 const Products = ({ products, addToCart, toggleFavorite, favorites }) => {
   const [quantities, setQuantities] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Function to handle quantity change
+
   const handleQuantityChange = (productId, quantity) => {
     setQuantities({ ...quantities, [productId]: quantity });
   };
 
-  // Function to handle adding to cart
   const handleAddToCart = (product) => {
-    const quantity = quantities[product.id] || 1; // Default quantity is 1 if not selected
+    const quantity = quantities[product.id] || 1; 
     addToCart({ ...product, quantity });
-    setQuantities({ ...quantities, [product.id]: undefined }); // Clear quantity after adding to cart
+    setQuantities({ ...quantities, [product.id]: undefined }); 
   };
 
-  // Function to handle search input change
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Function to clear search query
   const clearSearchQuery = () => {
     setSearchQuery('');
   };
 
-  // Function to filter products based on search query
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
   );
@@ -59,7 +55,7 @@ const Products = ({ products, addToCart, toggleFavorite, favorites }) => {
                   <h3>{product.name}</h3>
                   <p>{product.type}</p>
                   <p>{product.description}</p>
-                  <p className="price">${product.price}</p>
+                  <p className="price">{product.price}</p>
                   <div className="product-actions">
                     <div className="quantity-favorite">
                       <div className="quantity-dropdown">

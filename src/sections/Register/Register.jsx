@@ -45,7 +45,7 @@ function Register() {
       });
 
       const result = await response.json();
-      if (result.success) {
+      if (response.ok) {
         alert(result.message);
         navigate('/login');
       } else {
@@ -53,7 +53,12 @@ function Register() {
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -135,6 +140,10 @@ function Register() {
         />
         <button type="submit">Register</button>
       </form>
+
+      <div className="login-link-container">
+        <p>Already have an account? <button className="login-link" onClick={handleLoginClick}>Login</button></p>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router,Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './sections/navbar/Navbar';
 import Header from './sections/Header/Header';
 import Categories from './sections/Categories/Categories';
@@ -11,6 +11,7 @@ import Products from './sections/Products/Products';
 import Cart from './sections/Cart/Cart';
 import Contact from './sections/Contact/Contact';
 import Favorites from './sections/Favourites/Favourites';
+import AuthProvider from './contexts/AuthProvider';
 import Register from './sections/Register/Register';
 import Login from './sections/Login/Login';
 import Profile from './sections/Profile/Profile'; // Import the Profile component
@@ -95,6 +96,7 @@ const App = () => {
 
   return (
     <Router>
+      <AuthProvider>
       <Navbar 
         searchQuery={searchQuery}
         handleSearchInputChange={handleSearchInputChange}
@@ -188,6 +190,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
+    </AuthProvider>
     </Router>
   );
 };

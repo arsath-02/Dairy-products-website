@@ -13,17 +13,27 @@ function Register() {
     landmark: '',
     pincode: '',
     phoneNo: '',
-    profilePicture: null,
+    profilePicture: ''
   });
 
   const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: files ? files[0] : value,
-    }));
+    if (name === 'profilePicture' && files && files[0]) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevData) => ({
+          ...prevData,
+          profilePicture: reader.result
+        }));
+      };
+      reader.readAsDataURL(files[0]);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -33,15 +43,13 @@ function Register() {
       return;
     }
 
-    const form = new FormData();
-    Object.keys(formData).forEach((key) => {
-      form.append(key, formData[key]);
-    });
-
     try {
       const response = await fetch('http://localhost:5000/api/signup', {
         method: 'POST',
-        body: form,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();

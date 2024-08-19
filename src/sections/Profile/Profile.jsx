@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Profile.css';
 
-import { useAuth } from '../../contexts/AuthContext'; 
 import { Button } from 'react-bootstrap'; 
 
 function Profile() {
@@ -94,7 +93,7 @@ function Profile() {
         <div className="profile-details">
           {user.profilePicture && (
             <div className="profile-picture">
-              <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" />
+              <img src={user.profilePicture} alt="Profile" />
             </div>
           )}
           <p><strong>First Name:</strong> {user.firstname}</p>

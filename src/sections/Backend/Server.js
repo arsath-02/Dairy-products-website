@@ -58,15 +58,13 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 app.post('/api/signup', upload.single('profilePicture'), async (req, res) => {
-  const { firstname, lastname, email, password, address, landmark, pincode, phoneNo } = req.body;
-  const profilePicture = req.file ? req.file.path : null;
-
+  const { firstname, lastname, email, password, address, landmark, pincode, phoneNo, profilePicture } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ success: false, message: 'Email already in use' });
     }
-
+    console.log('profilePicture', profilePicture);
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ firstname, lastname, email, password: hashedPassword, address, landmark, pincode, phoneNo, profilePicture });
     await newUser.save();
@@ -81,18 +79,21 @@ app.post('/api/signup', upload.single('profilePicture'), async (req, res) => {
 app.post('/api/signin', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ success: false, message: 'Invalid email or password' });
     }
-
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ success: false, message: 'Invalid email or password' });
     }
 
     const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ success: true, message: 'User signed in successfully', token });
+
+    user = await User.findById(user._id);
+    const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
+
+    res.json({ success: true, message: 'User signed in successfully', token ,firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture});
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to sign in user', error: error.message });
   }
@@ -115,8 +116,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
-app.get('/api/profile', authenticateToken, async (req, res) => {
+/*app.get('/api/profile', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
     const user = await User.findById(userId);
@@ -126,12 +126,13 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
     }
 
     const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
-    res.json({ success: true, firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture });
+    res.json({ success: true, firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture});
   } catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch user profile', error: error.message });
   }
 });
+*/
 
 app.put('/api/users/:id', authenticateToken, async (req, res) => {
   const userId = req.params.id;

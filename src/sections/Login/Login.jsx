@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import { ClipLoader } from 'react-spinners';
 import './Login.css';
 
@@ -9,6 +11,7 @@ function Login({ onFormSwitch, onLogin }) {
   const [errors, setErrors] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const {setUser} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -54,6 +57,7 @@ function Login({ onFormSwitch, onLogin }) {
 
       const data = await response.json();
       if (response.ok) {
+        console.log(response.data)
         setMessage('Login successful!');
         setErrors({ email: '', password: '' });
         localStorage.setItem('token', data.token);

@@ -17,7 +17,7 @@ export const Header = () => {
           <div className="header-stats">
             <div className="stat-box">
               <span >
-                <CountUp end={50} duration={10} />
+                <CountUp end={500} duration={10} />
                 <p className="count-plus">+</p>
               </span>
               <h3>Products</h3>

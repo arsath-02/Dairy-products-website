@@ -12,13 +12,13 @@ import { dirname } from 'path';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/milky-web';
+const MONGODB_URI = process.env.MONGODB_URI ;
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,

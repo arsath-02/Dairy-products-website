@@ -64,9 +64,19 @@ app.post('/api/signup', upload.single('profilePicture'), async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ success: false, message: 'Email already in use' });
     }
-    console.log('profilePicture', profilePicture);
+
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ firstname, lastname, email, password: hashedPassword, address, landmark, pincode, phoneNo, profilePicture });
+    const newUser = new User({
+      firstname,
+      lastname,
+      email,
+      password: hashedPassword,
+      address,
+      landmark,
+      pincode,
+      phoneNo,
+      profilePicture,
+    });
     await newUser.save();
 
     res.json({ success: true, message: 'User registered successfully' });
@@ -90,10 +100,21 @@ app.post('/api/signin', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
 
-    user = await User.findById(user._id);
-    const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
+    const { firstname, lastname, address, landmark, pincode, phoneNo, profilePicture } = user;
 
-    res.json({ success: true, message: 'User signed in successfully', token ,firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture});
+    res.json({
+      success: true,
+      message: 'User signed in successfully',
+      token,
+      firstname,
+      lastname,
+      email,
+      address,
+      landmark,
+      pincode,
+      phoneNo,
+      profilePicture
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to sign in user', error: error.message });
   }
@@ -116,27 +137,10 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-/*app.get('/api/profile', authenticateToken, async (req, res) => {
-  try {
-    const userId = req.user.userId;
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
-
-    const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
-    res.json({ success: true, firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture});
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch user profile', error: error.message });
-  }
-});
-*/
 
 app.put('/api/users/:id', authenticateToken, async (req, res) => {
   const userId = req.params.id;
-  const { firstname, lastname, email, address, landmark, pincode, phoneNo } = req.body;
+  const { firstname, lastname, email, address, landmark, pincode, phoneNo, deliveryAddress } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, {
@@ -147,6 +151,7 @@ app.put('/api/users/:id', authenticateToken, async (req, res) => {
       landmark,
       pincode,
       phoneNo,
+      deliveryAddress, // Update the deliveryAddress along with other details
     }, { new: true });
 
     if (!updatedUser) {
@@ -180,7 +185,6 @@ app.post('/api/logout', (req, res) => {
   res.json({ success: true, message: 'Logged out successfully' });
 });
 
-
 app.get('/api/nearby-users', authenticateToken, async (req, res) => {
   const { pincode } = req.query;
 
@@ -192,34 +196,6 @@ app.get('/api/nearby-users', authenticateToken, async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch nearby users', error: error.message });
   }
 });
-// Example route to update user profile with deliveryAddress
-app.put('/api/users/:id', authenticateToken, async (req, res) => {
-  const userId = req.params.id;
-  const { firstname, lastname, email, address, landmark, pincode, phoneNo, deliveryAddress } = req.body;
-
-  try {
-    const updatedUser = await User.findByIdAndUpdate(userId, {
-      firstname,
-      lastname,
-      email,
-      address,
-      landmark,
-      pincode,
-      phoneNo,
-      deliveryAddress, // Include deliveryAddress in update
-    }, { new: true });
-
-    if (!updatedUser) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
-
-    res.json({ success: true, message: 'User updated successfully', user: updatedUser });
-  } catch (error) {
-    console.error('Error updating user:', error);
-    res.status(500).json({ success: false, message: 'Failed to update user', error: error.message });
-  }
-});
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

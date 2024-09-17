@@ -120,6 +120,23 @@ app.post('/api/signin', async (req, res) => {
   }
 });
 
+app.get('/api/profile', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    const { firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture } = user;
+    res.json({ success: true, firstname, lastname, email, address, landmark, pincode, phoneNo, profilePicture});
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch user profile', error: error.message });
+  }
+});
+
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];

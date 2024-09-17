@@ -18,7 +18,7 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/nearby-users?pincode=${pincode}&phoneNo=${phoneNo}`, {
+      const response = await fetch(`https://milky-web.onrender.com/api/nearby-users?pincode=${pincode}&phoneNo=${phoneNo}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
